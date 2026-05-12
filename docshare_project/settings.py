@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-^!o3q_=xn$g8&(qwvepf%f_$qv@-8dc_lh_81v^r!@%_le4dky
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,13 +21,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # XFrameOptions désactivé pour permettre la lecture des PDF
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'docshare_project.urls'
@@ -72,6 +72,11 @@ USE_TZ = True
 # ✅ CORRECTION 2 : Static files bien configurés
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles' # Dossier pour la production
+
+# Utiliser whitenoise pour compresser les fichiers statiques
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # ✅ CORRECTION 3 : Media files (documents uploadés)
 MEDIA_URL = '/media/'
@@ -84,9 +89,23 @@ LOGIN_URL = 'login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Mapping des tags Django → classes Bootstrap
+from django.contrib.messages import constants as messages_constants
+MESSAGE_TAGS = {
+    messages_constants.DEBUG:   'info',
+    messages_constants.INFO:    'info',
+    messages_constants.SUCCESS: 'success',
+    messages_constants.WARNING: 'warning',
+    messages_constants.ERROR:   'error',  # géré manuellement dans base.html
+}
+
 # Permet l'affichage des PDF dans les iframes (même origine)
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Taille max de fichier uploadé : 10 MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+
+# Évite certains blocages de connexion sur localhost
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+

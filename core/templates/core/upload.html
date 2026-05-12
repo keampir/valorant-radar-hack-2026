@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Uploader un document - DocShare{% endblock %}
+
+{% block content %}
+<div class="container my-5 fade-in">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-cloud-arrow-up text-primary" style="font-size: 3rem;"></i>
+                        <h2 class="fw-bold mt-2">Partager un document</h2>
+                        <p class="text-muted">Aidez la communauté en publiant vos ressources éducatives.</p>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label for="{{ form.titre.id_for_label }}" class="form-label fw-semibold">Titre du document</label>
+                            {{ form.titre }}
+                            {% if form.titre.errors %}
+                                <div class="text-danger small mt-1">{{ form.titre.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.categorie.id_for_label }}" class="form-label fw-semibold">Catégorie</label>
+                            {{ form.categorie }}
+                            <div class="form-text">Sélectionnez la catégorie qui correspond le mieux à votre document.</div>
+                            {% if form.categorie.errors %}
+                                <div class="text-danger small mt-1">{{ form.categorie.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.description.id_for_label }}" class="form-label fw-semibold">Description (optionnelle)</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger small mt-1">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.fichier.id_for_label }}" class="form-label fw-semibold">Fichier</label>
+                            {{ form.fichier }}
+                            <div class="form-text">Formats recommandés: PDF, DOCX, TXT. (Max 5MB)</div>
+                            {% if form.fichier.errors %}
+                                <div class="text-danger small mt-1">{{ form.fichier.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">
+                                <i class="bi bi-upload"></i> Mettre en ligne
+                            </button>
+                            <a href="{% url 'home' %}" class="btn btn-light rounded-pill">Annuler</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

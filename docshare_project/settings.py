@@ -7,7 +7,16 @@ SECRET_KEY = 'django-insecure-^!o3q_=xn$g8&(qwvepf%f_$qv@-8dc_lh_81v^r!@%_le4dky
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '.ngrok-free.app', '.ngrok.io', '.serveo.net']
+
+# Support pour ngrok (évite les erreurs CSRF)
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.ngrok-free.app',
+    'https://*.ngrok.io',
+    'https://*.serveo.net',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

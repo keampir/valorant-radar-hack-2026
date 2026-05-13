@@ -29,7 +29,8 @@ body {
     justify-content: space-between;
     padding: 15px 50px;
     background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-right: 20px;
 }
 
 .logo {
@@ -72,7 +73,7 @@ body {
     padding: 40px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     max-height: 1000px;
 
 }

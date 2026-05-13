@@ -2,24 +2,33 @@
 /* Couleurs du logo: Bleu #1565C0 | Vert #43A047 | Bleu foncé #0D47A1 */
 
 :root {
-    --primary:       #1565C0;
-    --primary-dark:  #0D47A1;
+    --primary: #1565C0;
+    --primary-dark: #0D47A1;
     --primary-light: #E3F2FD;
-    --accent:        #43A047;
-    --accent-dark:   #2E7D32;
-    --accent-light:  #E8F5E9;
-    --text:          #212529;
-    --text-muted:    #6c757d;
-    --bg:            #f8f9fa;
-    --white:         #ffffff;
-    --border:        #dee2e6;
-    --radius:        10px;
+    --accent: #43A047;
+    --accent-dark: #2E7D32;
+    --accent-light: #E8F5E9;
+    --text: #212529;
+    --text-muted: #6c757d;
+    --bg: #f8f9fa;
+    --white: #ffffff;
+    --border: #dee2e6;
+    --radius: 10px;
 }
 
 /* === SCROLLBAR === */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
 
 /* === BODY === */
 body {
@@ -32,6 +41,7 @@ body {
 .navbar {
     border-bottom: 3px solid var(--primary-light);
 }
+
 .navbar-brand img {
     height: 48px;
     width: auto;
@@ -42,51 +52,78 @@ body {
     background-color: var(--primary) !important;
     border-color: var(--primary) !important;
 }
+
 .btn-primary:hover {
     background-color: var(--primary-dark) !important;
     border-color: var(--primary-dark) !important;
 }
+
 .btn-outline-primary {
     color: var(--primary) !important;
     border-color: var(--primary) !important;
 }
+
 .btn-outline-primary:hover {
     background-color: var(--primary) !important;
     color: var(--white) !important;
 }
+
 .btn-success {
     background-color: var(--accent) !important;
     border-color: var(--accent) !important;
 }
+
 .btn-success:hover {
     background-color: var(--accent-dark) !important;
 }
 
 /* === TEXT COLORS === */
-.text-primary { color: var(--primary) !important; }
-.text-success { color: var(--accent) !important; }
-.text-accent  { color: var(--accent) !important; }
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-success {
+    color: var(--accent) !important;
+}
+
+.text-accent {
+    color: var(--accent) !important;
+}
 
 /* === LINKS === */
-a { color: var(--primary); }
-a:hover { color: var(--primary-dark); }
+a {
+    color: var(--primary);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
 
 /* === PAGINATION === */
-.page-link { color: var(--primary); }
+.page-link {
+    color: var(--primary);
+}
+
 .page-item.active .page-link {
     background-color: var(--primary);
     border-color: var(--primary);
 }
 
 /* === FORM FOCUS === */
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 0.2rem rgba(21,101,192,0.15);
+    box-shadow: 0 0 0 0.2rem rgba(21, 101, 192, 0.15);
 }
 
 /* === BADGES === */
-.badge.bg-primary { background-color: var(--primary) !important; }
-.badge.bg-success { background-color: var(--accent) !important; }
+.badge.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.badge.bg-success {
+    background-color: var(--accent) !important;
+}
 
 /* === ALERTS === */
 .alert-info {

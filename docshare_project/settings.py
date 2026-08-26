@@ -60,12 +60,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'docshare_project.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Utilisation du volume persistant sur Hugging Face si disponible
+PERSISTENT_DATA_DIR = Path('/data')
+
+if PERSISTENT_DATA_DIR.exists():
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': PERSISTENT_DATA_DIR / 'db.sqlite3',
+        }
     }
-}
+    MEDIA_ROOT = PERSISTENT_DATA_DIR / 'media'
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+    MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -90,7 +103,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ✅ CORRECTION 3 : Media files (documents uploadés)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_ROOT est déjà défini dynamiquement ci-dessus
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 # ✅ Redirections après connexion/déconnexion
 LOGIN_REDIRECT_URL = 'home'

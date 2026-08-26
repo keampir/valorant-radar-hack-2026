@@ -34,5 +34,5 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 7860
 
 # Commande pour lancer les migrations et démarrer le serveur gunicorn
-# On utilise 0.0.0.0 pour écouter sur toutes les interfaces
-CMD python manage.py migrate && gunicorn docshare_project.wsgi:application --bind 0.0.0.0:7860
+# On crée le dossier media dans /data s'il n'existe pas
+CMD mkdir -p /data/media && python manage.py migrate && gunicorn docshare_project.wsgi:application --bind 0.0.0.0:7860
